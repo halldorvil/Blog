@@ -1,0 +1,25 @@
+﻿.blog-post {
+  margin-top: 20px;
+  border: 1px solid #f1f1f1;
+  border-radius: 7px;
+  background-color: #fafafa;
+}
+
+.blog-post-content {
+  padding: 10px;
+}
+
+.blog-post-heading {
+  margin-bottom: 10px;
+}
+
+.blog-post-title {
+  padding: 0;
+  margin: 0;
+}
+
+.blog-post-date {
+  padding: 0;
+  margin: 0;
+  color: #929292;
+}
