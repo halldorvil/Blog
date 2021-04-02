@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import faker from "faker";
 import PageHeader from "./components/PageHeader";
 import BlogPosts from "./components/BlogPosts";
-import blog from "./apis/blog";
+import axios from "axios";
 
 export default () => {
   const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
-      const { data } = await blog.get("/posts");
+      //const { data } = await blog.get("/posts");
+      const { data } = await axios.get("/api/blog/posts");
       setBlogPosts(data);
     };
 
