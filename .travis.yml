@@ -1,17 +1,17 @@
 language: generic
 sudo: required
 services:
-    - docker
-
+- docker
+addons:
+  ssh_known_hosts: 142.93.227.119
+before_install:
+- openssl aes-256-cbc -K $encrypted_0ddd2445e49f_key -iv $encrypted_0ddd2445e49f_iv
+  -in travis_rsa.enc -out travis_rsa -d
+install:
+- npm install
+script:
+- 'true'
 after_success:
-    - docker build -t halldorvil/blog-client ./client
-    - docker build -t halldorvil/blog-nginx ./nginx
-    - docker build -t halldorvil/blog-server ./server
-
-    # Log in to the docker CLI
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-    # Take those images and push them to docker hub
-    - docker push halldorvil/blog-client
-    - docker push halldorvil/blog-nginx
-    - docker push halldorvil/blog-server
+- npm run build
+- cd ..
+- bash ./deploy.sh
