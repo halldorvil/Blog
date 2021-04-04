@@ -2,6 +2,9 @@ language: generic
 sudo: required
 services:
   - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
 
 addons:
   ssh_known_hosts: 142.93.227.119
@@ -15,16 +18,20 @@ script:
   - 'true'
 
 after_success:
-  - docker build -t halldorvil/blog-client ./client
-  - docker build -t halldorvil/blog-nginx ./nginx
-  - docker build -t halldorvil/blog-server ./server
+  - docker build -t halldorvil/blog-client:latest -t halldorvil/blog-client:$SHA ./client
+  - docker build -t halldorvil/blog-nginx:latest -t halldorvil/blog-nginx:$SHA ./nginx
+  - docker build -t halldorvil/blog-server:latest -t halldorvil/blog-server:$SHA ./server
 
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take those images and push them to docker hub
-  - docker push halldorvil/blog-client
-  - docker push halldorvil/blog-nginx
-  - docker push halldorvil/blog-server
+  - docker push halldorvil/blog-client:latest
+  - docker push halldorvil/blog-nginx:latest
+  - docker push halldorvil/blog-server:latest
+
+  - docker push halldorvil/blog-client:$SHA
+  - docker push halldorvil/blog-nginx:$SHA
+  - docker push halldorvil/blog-server:$SHA
 
   - bash ./deploy.sh
