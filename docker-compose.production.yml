@@ -9,8 +9,10 @@ services:
       - api
       - client
   api:
+    restart: always
     image: halldorvil/blog-server:TAG
   client:
+    restart: always
     stdin_open: true
     image: halldorvil/blog-client:TAG
     environment:
