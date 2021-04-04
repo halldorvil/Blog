@@ -9,7 +9,6 @@ export default () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      //const { data } = await blog.get("/posts");
       const { data } = await axios.get("/api/blog/posts");
       setBlogPosts(data);
     };

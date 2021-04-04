@@ -4,7 +4,7 @@ services:
     restart: always
     image: halldorvil/blog-nginx
     ports:
-      - 3050:80
+      - 80:80
     depends_on:
       - api
       - client
