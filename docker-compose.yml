@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   nginx:
     restart: always
@@ -6,18 +7,22 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - 3050:80
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
     depends_on:
       - api
       - client
+  
   api:
+    restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./server
+  
   client:
+    restart: always
     stdin_open: true
     build:
       dockerfile: Dockerfile.dev
       context: ./client
-    environment:
-      - BLOG_URL=http://localhost:3050/api/blog

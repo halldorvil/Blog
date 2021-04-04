@@ -1,19 +1,46 @@
 version: "3"
+
 services:
   nginx:
     restart: always
-    image: halldorvil/blog-nginx:TAG
+    image: halldorvil/blog-nginx:{TAG}
     ports:
-      - 80:80
+      - "80:80"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     depends_on:
       - api
       - client
+  
   api:
     restart: always
-    image: halldorvil/blog-server:TAG
+    image: halldorvil/blog-server:{TAG}
+  
   client:
     restart: always
     stdin_open: true
-    image: halldorvil/blog-client:TAG
-    environment:
-      - BLOG_URL=http://localhost:3050/api/blog
+    image: halldorvil/blog-client:{TAG}
+  
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - api
+      - client
+    command: certonly --webroot --webroot-path=/var/www/html --email halldorvil@gmail.com --agree-tos --no-eff-email --staging -d halldorvil.com -d www.halldorvil.com
+  
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/halldor/blog/views/
+      o: bind
