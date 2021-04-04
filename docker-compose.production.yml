@@ -1,0 +1,17 @@
+version: "3"
+services:
+  nginx:
+    restart: always
+    image: halldorvil/blog-nginx
+    ports:
+      - 3050:80
+    depends_on:
+      - api
+      - client
+  api:
+    image: halldorvil/blog-server
+  client:
+    stdin_open: true
+    image: halldorvil/blog-client
+    environment:
+      - BLOG_URL=http://localhost:3050/api/blog
