@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const posts = [
   {
     id: 1,
-    date: "4/01/2021",
+    date: "04/04/2021",
     title: "Welcome to my blog!",
     content:
         "Hi there!\nMy name is Halldor and I am a software developer from Iceland. " +
