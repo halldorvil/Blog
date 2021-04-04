@@ -6,7 +6,7 @@ if [ $TRAVIS_BRANCH == 'main' ] ; then
 
   rsync -a docker-compose.production.yml travis@142.93.227.119:/home/halldor/blog 
 
-  docker-compose -f docker-compose.production.yaml up
+  docker-compose -f docker-compose.production.yml up
 else
   echo "Not deploying, since the branch isn't master."
 fi
