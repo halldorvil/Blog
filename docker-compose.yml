@@ -9,6 +9,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - web-root:/var/www/html
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - api
@@ -26,3 +27,11 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./client
+
+volumes:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./static
+      o: bind
