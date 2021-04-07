@@ -2,36 +2,25 @@ version: "3"
 
 services:
   nginx:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
+    restart: unless-stopped
+    image: nginx:1.15-alpine
     ports:
       - "80:80"
     volumes:
-      - web-root:/var/www/html
-      - ./nginx:/etc/nginx/conf.d
+      - ./data/nginx/dev:/etc/nginx/conf.d
     depends_on:
-      - api
       - client
-  
+      - api
+
   api:
-    restart: always
+    restart: unless-stopped
     build:
       dockerfile: Dockerfile.dev
       context: ./server
-  
+
   client:
-    restart: always
+    restart: unless-stopped
     stdin_open: true
     build:
       dockerfile: Dockerfile.dev
       context: ./client
-
-volumes:
-  web-root:
-    driver: local
-    driver_opts:
-      type: none
-      device: ./static
-      o: bind
