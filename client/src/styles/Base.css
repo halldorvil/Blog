@@ -3,7 +3,8 @@ body {
 }
 
 h1,
-h3 {
+h3,
+p {
   font-family: "Georgia", "Times New Roman", Times, serif;
 }
 
