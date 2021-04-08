@@ -15,8 +15,7 @@ const BlogPost = ({ post }) => {
             <h1 className="blog-post-title">{post.title}</h1>
             <p className="blog-post-date">{post.date}</p>
           </div>
-          <p>{post.content}</p>
-          <p>{visibility}</p>
+          <p style={{ whiteSpace: "pre-line" }}>{post.content}</p>
         </div>
       </div>
     </VisibilitySensor>

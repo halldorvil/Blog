@@ -17,11 +17,12 @@ const posts = [
     date: "04/07/2021",
     title: "Welcome to my blog!",
     content:
-      "Hi there!\nMy name is Halldor and I am a software developer from Iceland. " +
+      "Hi there!\n\n" +
+      "My name is Halldor and I am a software developer from Iceland. " +
       "I recently started studying React and decided to start this blog as a way to apply and put those skills into practice. " +
-      "Who knows, maybe I'll actually keep this blog going and share some of what's going on in my life!\n" +
+      "Who knows, maybe I'll actually keep this blog going and share some of what's going on in my life!\n\n" +
       "Cheers,\n" +
-      "Halldor",
+      "Halldor Vilhjalmsson",
   },
 ];
 
