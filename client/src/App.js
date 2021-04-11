@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import faker from "faker";
 import PageHeader from "./components/PageHeader";
 import BlogPosts from "./components/BlogPosts";
 import axios from "axios";
@@ -18,7 +17,7 @@ export default () => {
 
   return (
     <div>
-      <PageHeader title="Halldór Vilhjálmsson" image={faker.image.image()} />
+      <PageHeader title="Halldór Vilhjálmsson" image={process.env.PUBLIC_URL + "/profile-pic-1.jpg"} />
       <div className="ui container">
         <BlogPosts posts={blogPosts} />
       </div>
