@@ -19,7 +19,7 @@ script:
 
 after_success:
   - docker build -t halldorvil/blog-client:latest -t halldorvil/blog-client:$SHA ./client
-  - docker build -t halldorvil/blog-api:latest -t halldorvil/blog-server:$SHA ./server
+  - docker build -t halldorvil/blog-api:latest -t halldorvil/blog-api:$SHA ./api
 
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
