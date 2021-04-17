@@ -9,6 +9,27 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Postgres Client Setup
+const { Pool } = require("pg");
+const pgClient = new Pool({
+  user: keys.pgUser,
+  host: keys.pgHost,
+  database: keys.pgDatabase,
+  password: keys.pgPassword,
+  port: keys.pgPort,
+});
+
+pgClient.on("connect", () => {
+  pgClient.query(
+    "CREATE TABLE IF NOT EXISTS blogposts (" +
+      "id serial PRIMARY KEY," +
+      "created_on TIMESTAMP NOT NULL," +
+      "title VARCHAR(500) NOT NULL," +
+      "content VARCHAR(MAX) NOT NULL" +
+      ")"
+  ).catch((err) => console.log(err));
+});
+
 // Express route handlers
 
 const posts = [
@@ -31,8 +52,10 @@ app.get("/test", (req, res) => {
   res.send("Hi");
 });
 
-app.get("/blog/posts", (req, res) => {
-  res.send(posts);
+app.get("/blog/posts", async (req, res) => {
+  const blogposts = await pgClient.query("SELECT * FROM blogposts");
+  
+  res.send(blogposts);
 });
 
 app.listen(5000, (err) => {

@@ -8,8 +8,8 @@ export default () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const { data } = await axios.get("/api/blog/posts");
-      setBlogPosts(data);
+      const { data } = await axios.get("/api/v1/blogposts");
+      setBlogPosts(data.data);
     };
 
     getPosts();

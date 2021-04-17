@@ -16,9 +16,28 @@ services:
       - api
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
+  postgres:
+    restart: unless-stopped
+    image: postgres:13.2-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD={ENV_PG_PASSWORD}
+
   api:
     restart: unless-stopped
-    image: halldorvil/blog-server:{TAG}
+    image: halldorvil/blog-api:{TAG}
+    environment:
+      - PGUSER={ENV_PG_USER}
+      - PGHOST={ENV_PG_HOST}
+      - PGDATABASE={ENV_PG_DATABASE}
+      - PGPASSWORD={ENV_PG_PASSWORD}
+      - PGPORT={ENV_PG_PORT}
+      - PORT={ENV_API_PORT}
+    depends_on:
+      - postgres
 
   client:
     restart: unless-stopped
