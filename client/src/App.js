@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "./components/PageHeader";
-import BlogPosts from "./components/BlogPosts";
+import BlogPosts from "./components/BlogPostList";
 import axios from "axios";
 
 export default () => {
