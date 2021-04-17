@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import DOMPurify from "dompurify";
 import "../styles/BlogPost.css";
 
 const BlogPost = ({ post: { content, created_on, title } }) => {
@@ -14,7 +15,10 @@ const BlogPost = ({ post: { content, created_on, title } }) => {
             {moment(created_on).format("MMM Do YYYY")}
           </p>
         </div>
-        <div className="blog-post-text" dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          className="blog-post-text"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+        />
       </div>
     </div>
   );
