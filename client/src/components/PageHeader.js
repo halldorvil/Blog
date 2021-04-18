@@ -1,15 +1,17 @@
 import React from "react";
-import "../styles/Base.css";
-import "../styles/PageHeader.css";
 
 const PageHeader = ({ title, image }) => {
   return (
-    <div className="page-header">
-      <div className="page-header-profile-image image-cropper">
-        <img className="profile-pic" alt="avatar" src={image} />
+    <div className="flex flex-row items-center border-b border-gray-100 shadow-sm p-1">
+      <div className="relative w-36 h-36 mx-10 my-4">
+        <img
+          className="rounded-full border border-gray-100 shadow-md"
+          alt="avatar"
+          src={image}
+        />
       </div>
-      <div className="page-header-title">
-        <h3>{title}</h3>
+      <div className="m-1">
+        <h3 className="font-serif text-2xl font-bold">{title}</h3>
       </div>
     </div>
   );
