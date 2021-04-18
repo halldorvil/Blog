@@ -16,12 +16,14 @@ export default () => {
   }, []);
 
   return (
-    <div>
-      <PageHeader
-        title="Halldór Vilhjálmsson"
-        image={process.env.PUBLIC_URL + "/images/profile-pic-1.jpg"}
-      />
-      <div className="ui container">
+    <div className="flex flex-col">
+      <div className="flex-1">
+        <PageHeader
+          title="Halldór Vilhjálmsson"
+          image={process.env.PUBLIC_URL + "/images/profile-pic-1.jpg"}
+        />
+      </div>
+      <div className="flex-1">
         <BlogPosts posts={blogPosts} />
       </div>
     </div>
